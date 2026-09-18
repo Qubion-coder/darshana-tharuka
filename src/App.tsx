@@ -498,19 +498,19 @@ export default function WeddingInvitation() {
                   initial={{ opacity: 0, y: 20 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: 0.15, duration: 0.8 }}
-                  className="-mt-4 md:mt-10"
+                  className="-mt-8 md:mt-10"
                 >
                   <h1 className="text-6xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
                     {INVITATION.couple.bride}
                   </h1>
 
-                  <div className="mt-6 flex items-center justify-center gap-5">
+                  <div className="mt-2 flex items-center justify-center gap-5">
                     <div className="h-px w-14 bg-[#755928]/40" />
                     <span className="text-4xl md:text-5xl text-[#755928] drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] font-bold">සහ</span>
                     <div className="h-px w-14 bg-[#755928]/40" />
                   </div>
 
-                  <h1 className="mt-6 text-6xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
+                  <h1 className="mt-2 text-6xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
                     {INVITATION.couple.groom}
                   </h1>
                 </motion.div>
