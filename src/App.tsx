@@ -35,7 +35,7 @@ const INVITATION = {
 
 const backgroundMusic = "/handawaka-various-artists.mp3";
 const googleScriptUrl =
-  "https://script.google.com/macros/s/AKfycbx6tVTRxM0Fjc10fR0a35PjSjb9JJN-9F7zDpxyJvVMhdZ3A-_rOkAV8x8Cwpeqfp5NLw/exec";
+  "https://script.google.com/macros/s/AKfycbwPviuSkQFSMfVuIHF0H4lYkJBJd_uj8wTZukOcFHTQQUumpVjNUilRv5p7slTaunY/exec";
 
 const publicImagePath = (fileName: string) => `/images/${fileName.replaceAll(" ", "%20")}`;
 const preImagePath = (fileName: string) => `/pre/${fileName.replaceAll(" ", "%20")}`;
@@ -286,12 +286,13 @@ export default function WeddingInvitation() {
       throw new Error("Google Script URL tl ilid ke;");
     }
 
-    const response = await fetch(googleScriptUrl, {
-      method: "POST",
-      body: new URLSearchParams(payload),
-    });
-
-    if (!response.ok) {
+    try {
+      await fetch(googleScriptUrl, {
+        method: "POST",
+        mode: "no-cors",
+        body: new URLSearchParams(payload),
+      });
+    } catch (error) {
       throw new Error("b,a,Su id¾:l fkdùh");
     }
   };
@@ -832,37 +833,6 @@ export default function WeddingInvitation() {
                         </button>
                       </div>
 
-                      <AnimatePresence>
-                        {rsvpForm.guests !== "0" && (
-                          <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: "auto" }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="space-y-2 overflow-hidden"
-                          >
-                            <label className="text-xs font-bold text-slate-500 ml-1">පැමිණෙන අමුත්තන් ගණන</label>
-                            <div className="relative">
-                              <select
-                                value={rsvpForm.guests}
-                                onChange={(e) => {
-                                  setRsvpStatus("idle");
-                                  setRsvpForm((prev) => ({ ...prev, guests: e.target.value }));
-                                }}
-                                className="w-full bg-[#faf8f5] border border-slate-200 rounded-xl px-4 py-4 md:py-5 text-slate-800 focus:outline-none focus:ring-1 focus:ring-[#755928] transition-all text-base font-numeric appearance-none"
-                              >
-                                {[1, 2, 3, 4, 5, 6].map((num) => (
-                                  <option key={num} value={num.toString()}>
-                                    {num} {num === 1 ? "(මම පමණක්)" : ""}
-                                  </option>
-                                ))}
-                              </select>
-                              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
-                                <ChevronDown className="w-5 h-5 text-slate-400" />
-                              </div>
-                            </div>
-                          </motion.div>
-                        )}
-                      </AnimatePresence>
 
                       {(rsvpStatus === "success" || rsvpStatus === "error") && (
                         <p
