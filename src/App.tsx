@@ -22,6 +22,7 @@ const INVITATION = {
   },
   venue: {
     name: "ග්‍රෑන්ඩ් ගාඩියන් උත්සව ශාලාව",
+    hall: "Grand Banquet Hall",
     city: "කුරුවිට",
     mapQuery: "Grand Guardian Banquet Hall, Kuruwita",
     googleMapsLink: "https://maps.app.goo.gl/HYjLEfNAv3uiT2kL6",
@@ -415,7 +416,7 @@ export default function WeddingInvitation() {
                       විවාහ ආරාධනයයි
                     </h2>
                     <p className="text-xl md:text-2xl text-[#755928] tracking-[0.3em] drop-shadow-[0_2px_10px_rgba(255,255,255,0.8)]">
-                      {INVITATION.couple.bride} සහ {INVITATION.couple.groom}
+                      {INVITATION.couple.groom} සහ {INVITATION.couple.bride}
                     </p>
                   </motion.div>
 
@@ -500,18 +501,18 @@ export default function WeddingInvitation() {
                   transition={{ delay: 0.15, duration: 0.8 }}
                   className="-mt-8 md:mt-10"
                 >
-                  <h1 className="text-6xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
-                    {INVITATION.couple.bride}
+                  <h1 className="text-5xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
+                    {INVITATION.couple.groom}
                   </h1>
 
                   <div className="mt-2 flex items-center justify-center gap-5">
-                    <div className="h-px w-14 bg-[#755928]/40" />
-                    <span className="text-4xl md:text-5xl text-[#755928] drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] font-bold">සහ</span>
-                    <div className="h-px w-14 bg-[#755928]/40" />
+                    <div className="h-px w-10 sm:w-14 bg-[#755928]/40" />
+                    <span className="text-3xl sm:text-4xl md:text-5xl text-[#755928] drop-shadow-[0_0_8px_rgba(255,255,255,0.8)] font-bold">සහ</span>
+                    <div className="h-px w-10 sm:w-14 bg-[#755928]/40" />
                   </div>
 
-                  <h1 className="mt-2 text-6xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
-                    {INVITATION.couple.groom}
+                  <h1 className="mt-2 text-5xl sm:text-7xl md:text-8xl text-[#755928] italic leading-none drop-shadow-[0_0_15px_rgba(255,255,255,0.9)]">
+                    {INVITATION.couple.bride}
                   </h1>
                 </motion.div>
 
@@ -521,7 +522,7 @@ export default function WeddingInvitation() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 0.9 }}
                 transition={{ delay: 1.1, duration: 1 }}
-                className="absolute bottom-12 md:bottom-16 left-1/2 -translate-x-1/2 w-full px-4 z-20 flex flex-col items-center gap-4 md:gap-6"
+                className="absolute bottom-6 md:bottom-10 left-1/2 -translate-x-1/2 w-full px-4 z-20 flex flex-col items-center gap-4 md:gap-5"
               >
                 <motion.p
                   initial={{ opacity: 0, y: 16 }}
@@ -532,13 +533,22 @@ export default function WeddingInvitation() {
                   අපගේ ජීවිතයේ අමතක නොවන සුබ මොහොත ඔබ සමඟ බෙදා ගැනීමට කැමැත්තෙමු!
                 </motion.p>
                 
-                <div className="w-px h-14 bg-gradient-to-b from-[#755928]/30 to-transparent rounded-full overflow-hidden">
-                  <motion.div
-                    animate={{ y: [-56, 56] }}
-                    transition={{ duration: 2.2, repeat: Infinity, ease: "easeInOut" }}
-                    className="w-full h-1/2 bg-[#967436]/45"
-                  />
-                </div>
+                <button
+                  onClick={() => document.getElementById("details")?.scrollIntoView({ behavior: "smooth" })}
+                  className="group flex flex-col items-center gap-2 cursor-pointer hover:scale-105 transition-transform mt-2"
+                >
+                  <span className="text-[10px] md:text-xs text-[#755928] font-bold tracking-[0.2em] uppercase opacity-70 group-hover:opacity-100 transition-opacity">
+                    Scroll Down
+                  </span>
+                  <div className="w-px h-10 md:h-12 bg-gradient-to-b from-[#755928]/30 to-transparent rounded-full overflow-hidden relative">
+                    <motion.div
+                      animate={{ y: [-48, 48] }}
+                      transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                      className="absolute top-0 left-0 w-full h-1/2 bg-[#967436]"
+                    />
+                  </div>
+                  <ChevronDown className="w-4 h-4 text-[#967436] opacity-70 group-hover:opacity-100 animate-bounce -mt-1" />
+                </button>
               </motion.div>
             </section>
 
@@ -659,6 +669,7 @@ export default function WeddingInvitation() {
                           </div>
                           <div className="text-base md:text-lg text-[#755928] tracking-wide font-bold">
                             {INVITATION.venue.name}, {INVITATION.venue.city}
+                            <div className="text-sm md:text-base font-medium mt-0.5">{INVITATION.venue.hall}</div>
                           </div>
                           <a
                             href={INVITATION.venue.googleMapsLink}
@@ -798,7 +809,9 @@ export default function WeddingInvitation() {
                           type="button"
                           onClick={() => {
                             setRsvpStatus("idle");
-                            setRsvpForm((prev) => ({ ...prev, guests: "1" }));
+                            if (rsvpForm.guests === "0") {
+                              setRsvpForm((prev) => ({ ...prev, guests: "1" }));
+                            }
                           }}
                           aria-pressed={rsvpForm.guests !== "0"}
                           className={`w-full py-5 md:py-6 rounded-xl text-sm md:text-base tracking-wide transition-all shadow-sm flex items-center justify-center px-4 leading-relaxed active:scale-[0.98] ${rsvpForm.guests !== "0" ? "bg-[#755928] text-white hover:bg-[#5c451e]" : "bg-[#faf8f5] hover:bg-slate-200 text-slate-700"}`}
@@ -818,6 +831,38 @@ export default function WeddingInvitation() {
                           කණගාටුයි, මට පැමිණිය නොහැක. නමුත් මගේ ආශීර්වාදය ඔබ සමඟයි.
                         </button>
                       </div>
+
+                      <AnimatePresence>
+                        {rsvpForm.guests !== "0" && (
+                          <motion.div
+                            initial={{ opacity: 0, height: 0 }}
+                            animate={{ opacity: 1, height: "auto" }}
+                            exit={{ opacity: 0, height: 0 }}
+                            className="space-y-2 overflow-hidden"
+                          >
+                            <label className="text-xs font-bold text-slate-500 ml-1">පැමිණෙන අමුත්තන් ගණන</label>
+                            <div className="relative">
+                              <select
+                                value={rsvpForm.guests}
+                                onChange={(e) => {
+                                  setRsvpStatus("idle");
+                                  setRsvpForm((prev) => ({ ...prev, guests: e.target.value }));
+                                }}
+                                className="w-full bg-[#faf8f5] border border-slate-200 rounded-xl px-4 py-4 md:py-5 text-slate-800 focus:outline-none focus:ring-1 focus:ring-[#755928] transition-all text-base font-numeric appearance-none"
+                              >
+                                {[1, 2, 3, 4, 5, 6].map((num) => (
+                                  <option key={num} value={num.toString()}>
+                                    {num} {num === 1 ? "(මම පමණක්)" : ""}
+                                  </option>
+                                ))}
+                              </select>
+                              <div className="absolute right-4 top-1/2 -translate-y-1/2 pointer-events-none">
+                                <ChevronDown className="w-5 h-5 text-slate-400" />
+                              </div>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
 
                       {(rsvpStatus === "success" || rsvpStatus === "error") && (
                         <p
