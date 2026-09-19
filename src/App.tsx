@@ -585,17 +585,17 @@ export default function WeddingInvitation() {
 
                   <div className="text-[#755928] space-y-6 max-w-3xl mx-auto leading-relaxed text-base md:text-lg">
                     <p className="text-slate-700">
-                      ජී. ලාල් පත්මසිරි මහතාගේ සහ එම මෑණියන්ගේ ආදරණීය දියණිය වන
-                    </p>
-                    <h3 className="text-3xl md:text-4xl font-bold text-[#967436] my-2">
-                      තාරුකා
-                    </h3>
-
-                    <p className="text-slate-700">
-                      එච්.වී. ආර්යවංශ මහතාගේ සහ එම මෑණියන්ගේ ආදරණීය පුත් වන
+                      එම්.වී. ආරියවංශ මහතාගේ සහ එම මැතිණියගේ ආදරණීය පුතුණුවන් වන
                     </p>
                     <h3 className="text-3xl md:text-4xl font-bold text-[#967436] my-2">
                       දර්ශන
+                    </h3>
+
+                    <p className="text-slate-700">
+                      පී. ලාල් පත්මසිරි මහතාගේ සහ එම මැතිණියගේ ආදරණීය දියණිය වන
+                    </p>
+                    <h3 className="text-3xl md:text-4xl font-bold text-[#967436] my-2">
+                      තාරුකා
                     </h3>
 
                     <p className="text-slate-700 max-w-2xl mx-auto pt-4 text-base md:text-lg">
